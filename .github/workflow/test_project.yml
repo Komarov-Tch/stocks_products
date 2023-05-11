@@ -1,0 +1,9 @@
+on:
+  push:
+    branches: [master]
+jobs:
+  tests:
+    runs-on: ubuntu-20.04
+    env:
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+#дописать.
