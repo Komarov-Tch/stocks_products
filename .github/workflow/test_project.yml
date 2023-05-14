@@ -1,3 +1,4 @@
+name: Домашняя работа
 on:
   push:
     branches: [master]
@@ -6,4 +7,40 @@ jobs:
     runs-on: ubuntu-20.04
     env:
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
-#дописать.
+      DEBUG: ${{ secrets.DEBUG }}
+      ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+      DB_ENGINE: ${{ secrets.DB_ENGINE }}
+      DB_NAME: ${{ secrets.DB_NAME }}
+      DB_HOST: ${{ secrets.DB_HOST }}
+      DB_PORT: ${{ secrets.DB_PORT }}
+      DB_USER: ${{ secrets.DB_USER }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+    service:
+      postgresql_main:
+        image: postgres: 12
+        env:
+          POSTGRES_DB: ${{ env.DB_NAME }}
+          POSTGRES_USER: ${{ env.DB_USER }}
+          POSTGRES_PASSWORD: ${{ env.DB_PASSWORD }}
+        ports:
+          - 5432:5432
+        optoins:
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5s
+    steps:
+      -name: Проверка репозитория
+      uses: actions/checkout@v3
+
+      -name: установка питона
+      uses: action/setup-python@v3
+      with:
+        python-version: 3.9
+      
+      -name: Зависимости
+      run: pip install -r requirements.txt
+
+      name: Литинг
+      run: flake8 logistic/ stocks_products/ --exclude=logistic/migrations/
+    
