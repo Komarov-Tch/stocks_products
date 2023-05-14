@@ -33,16 +33,16 @@ jobs:
 
     steps:
       - name: Проверка репозитория
-      uses: actions/checkout@v3
+        uses: actions/checkout@v3
 
       - name: Установка питона
-      uses: action/setup-python@v3
-      with:
-        python-version: 3.9
+        uses: action/setup-python@v3
+        with:
+          python-version: 3.9
       
       - name: Зависимости
-      run: pip install -r requirements.txt
+        run: pip install -r requirements.txt
 
       - name: Литинг
-      run: flake8 logistic/ stocks_products/ --exclude=logistic/migrations/
+        run: flake8 logistic/ stocks_products/ --exclude=logistic/migrations/
   
