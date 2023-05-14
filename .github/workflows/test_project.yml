@@ -30,19 +30,19 @@ jobs:
           --health-interval 5s
           --health-timeout 5s
           --health-retries 5s
-          
+
     steps:
-      -name: Проверка репозитория
+      - name: Проверка репозитория
       uses: actions/checkout@v3
 
-      -name: Установка питона
+      - name: Установка питона
       uses: action/setup-python@v3
       with:
         python-version: 3.9
       
-      -name: Зависимости
+      - name: Зависимости
       run: pip install -r requirements.txt
 
-      name: Литинг
+      - name: Литинг
       run: flake8 logistic/ stocks_products/ --exclude=logistic/migrations/
   
