@@ -46,3 +46,10 @@ jobs:
       - name: Литинг
         run: flake8 logistic/ stocks_products/ --exclude=logistic/migrations/
   
+      - name: Деплой
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_ADRESS }}
+          username: ${{ secrets.HOST_USER }}
+          password: ${{ secrets.HOST_PASSWORD }}
+          script: expect /home/penry/stocks_products/deploy.exp
