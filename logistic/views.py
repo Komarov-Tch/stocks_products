@@ -27,4 +27,4 @@ class StockViewSet(ModelViewSet):
 
 @api_view(['GET'])
 def samlpe_view(request):
-    return Response('Всем привет')
+    return Response('Всем привет!')
