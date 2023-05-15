@@ -3,7 +3,7 @@ from rest_framework.filters import SearchFilter
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.views import APIView
 from logistic.models import Product, Stock
 from logistic.serializers import ProductSerializer, StockSerializer
 
@@ -25,6 +25,6 @@ class StockViewSet(ModelViewSet):
     pagination_class = LimitOffsetPagination
 
 
-@api_view(['GET'])
-def samlpe_view(request):
-    return Response('Всем привет!!!!')
+class TestView(APIView):
+    def get(self, request):
+        return Response({"message": "Всем большой привет!"})
